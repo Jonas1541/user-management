@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: usermanagement
+
+  datasource:
+    # URL padrão para quando você roda via IDE/Terminal (conecta no docker exposto)
+    url: jdbc:postgresql://localhost:5432/usermanagement
+    username: jonas
+    password: password123
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update # Cria/Atualiza as tabelas automaticamente
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+server:
+  port: 8080
