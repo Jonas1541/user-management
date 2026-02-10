@@ -13,6 +13,7 @@ public class UserDTO {
 
     @NotNull(message = "Birth date is required")
     @Past(message = "Birth date must be in the past")
+    @org.springframework.format.annotation.DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate birthDate;
 
     @NotBlank(message = "Document is required")
