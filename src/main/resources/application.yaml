@@ -3,7 +3,6 @@ spring:
     name: usermanagement
 
   datasource:
-    # URL padrão para quando você roda via IDE/Terminal (conecta no docker exposto)
     url: jdbc:postgresql://localhost:5432/usermanagement
     username: jonas
     password: password123
@@ -11,12 +10,28 @@ spring:
 
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
-    hibernate:
-      ddl-auto: update # Cria/Atualiza as tabelas automaticamente
     show-sql: true
+    # Hibernate espera o Flyway terminar antes de validar
+    defer-datasource-initialization: false 
+    hibernate:
+      ddl-auto: validate
     properties:
       hibernate:
         format_sql: true
+
+  # CONFIGURAÇÃO CRÍTICA DO FLYWAY
+  # Deve estar alinhada à esquerda junto com 'datasource' e 'jpa'
+  flyway:
+    enabled: true
+    baseline-on-migrate: true
+    locations: classpath:db/migration
+
+  # Configuração para tratar erros 404 (Página não encontrada)
+  mvc:
+    throw-exception-if-no-handler-found: true
+  web:
+    resources:
+      add-mappings: false
 
 server:
   port: 8080

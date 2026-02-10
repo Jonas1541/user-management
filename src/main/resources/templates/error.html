@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/main-layout}">
+<head>
+    <title>Error</title>
+</head>
+<body>
+    <div layout:fragment="content" class="text-center mt-5">
+        <h1 class="display-1 text-danger" th:text="${status}">500</h1>
+        <h2 class="mb-4">Oops! Something went wrong.</h2>
+        <p class="lead" th:text="${message}">Error details here...</p>
+        
+        <a href="/users" class="btn btn-primary mt-3">Go Back to Users</a>
+    </div>
+</body>
+</html>

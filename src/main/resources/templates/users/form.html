@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/main-layout}">
+<head>
+    <title th:text="${userDto.id == null} ? 'New User' : 'Edit User'">User Form</title>
+</head>
+<body>
+
+<div layout:fragment="content">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-sm">
+                <div class="card-header bg-white">
+                    <h4 class="mb-0" th:text="${userDto.id == null} ? 'Create New User' : 'Edit User'">Form</h4>
+                </div>
+                <div class="card-body">
+                    
+                    <form th:action="${userDto.id == null} ? @{/users} : @{/users/{id}(id=${userDto.id})}"
+                          th:object="${userDto}" 
+                          method="post">
+                        
+                        <input type="hidden" th:field="*{id}" />
+
+                        <h5 class="mb-3 text-primary">Personal Info</h5>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="name" class="form-label">Full Name</label>
+                                <input type="text" class="form-control" id="name" th:field="*{name}"
+                                       th:classappend="${#fields.hasErrors('name')} ? 'is-invalid' : ''">
+                                <div class="invalid-feedback" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="document" class="form-label">Document (CPF/ID)</label>
+                                <input type="text" class="form-control" id="document" th:field="*{document}"
+                                       th:classappend="${#fields.hasErrors('document')} ? 'is-invalid' : ''">
+                                <div class="invalid-feedback" th:if="${#fields.hasErrors('document')}" th:errors="*{document}"></div>
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="birthDate" class="form-label">Birth Date</label>
+                            <input type="date" class="form-control" id="birthDate" th:field="*{birthDate}"
+                                   th:classappend="${#fields.hasErrors('birthDate')} ? 'is-invalid' : ''">
+                            <div class="invalid-feedback" th:if="${#fields.hasErrors('birthDate')}" th:errors="*{birthDate}"></div>
+                        </div>
+
+                        <h5 class="mb-3 text-primary border-top pt-3">Address</h5>
+                        
+                        <div class="row mb-3">
+                            <div class="col-md-8">
+                                <label for="addressLine" class="form-label">Street / Avenue</label>
+                                <input type="text" class="form-control" id="addressLine" th:field="*{addressLine}"
+                                       th:classappend="${#fields.hasErrors('addressLine')} ? 'is-invalid' : ''">
+                                <div class="invalid-feedback" th:if="${#fields.hasErrors('addressLine')}" th:errors="*{addressLine}"></div>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="addressNumber" class="form-label">Number</label>
+                                <input type="text" class="form-control" id="addressNumber" th:field="*{addressNumber}"
+                                       th:classappend="${#fields.hasErrors('addressNumber')} ? 'is-invalid' : ''">
+                                <div class="invalid-feedback" th:if="${#fields.hasErrors('addressNumber')}" th:errors="*{addressNumber}"></div>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-5">
+                                <label for="city" class="form-label">City</label>
+                                <input type="text" class="form-control" id="city" th:field="*{city}"
+                                       th:classappend="${#fields.hasErrors('city')} ? 'is-invalid' : ''">
+                                <div class="invalid-feedback" th:if="${#fields.hasErrors('city')}" th:errors="*{city}"></div>
+                            </div>
+                            <div class="col-md-3">
+                                <label for="state" class="form-label">State</label>
+                                <input type="text" class="form-control" id="state" th:field="*{state}" placeholder="e.g. SP" maxlength="2"
+                                       th:classappend="${#fields.hasErrors('state')} ? 'is-invalid' : ''">
+                                <div class="invalid-feedback" th:if="${#fields.hasErrors('state')}" th:errors="*{state}"></div>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="zip" class="form-label">Zip Code</label>
+                                <input type="text" class="form-control" id="zip" th:field="*{zip}"
+                                       th:classappend="${#fields.hasErrors('zip')} ? 'is-invalid' : ''">
+                                <div class="invalid-feedback" th:if="${#fields.hasErrors('zip')}" th:errors="*{zip}"></div>
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-end gap-2 mt-4">
+                            <a href="/users" class="btn btn-secondary">Cancel</a>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="bi bi-save"></i> Save User
+                            </button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

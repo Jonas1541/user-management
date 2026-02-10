@@ -32,6 +32,10 @@ dependencies {
     // Database
     runtimeOnly("org.postgresql:postgresql")
 
+    // Database Migrations
+    implementation("org.springframework.boot:spring-boot-starter-flyway")
+    implementation("org.flywaydb:flyway-database-postgresql")
+
     // Developer Experience
     developmentOnly("org.springframework.boot:spring-boot-devtools")
     developmentOnly("org.springframework.boot:spring-boot-docker-compose") // Integração nativa com seu compose.yaml
@@ -43,4 +47,8 @@ dependencies {
 
 tasks.withType<Test> {
     useJUnitPlatform()
+}
+
+springBoot {
+    mainClass.set("com.jonasdurau.usermanagement.UsermanagementApplication")
 }
